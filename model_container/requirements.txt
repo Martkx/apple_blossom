@@ -1,0 +1,8 @@
+h5py
+fastapi
+uvicorn
+python-multipart
+numpy
+keras
+tensorflow
+pillow
