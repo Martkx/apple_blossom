@@ -1,0 +1,8 @@
+numpy
+sklearn
+tensorflow
+keras
+json
+matplotlib
+fastapi
+typing

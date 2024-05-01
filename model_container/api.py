@@ -1,8 +1,6 @@
 from fastapi import FastAPI, UploadFile
 import model_container.model_execution as model_execution
 from typing import Any
-import os
-
 
 FILE_PATHS: list = []
 app = FastAPI()
@@ -32,7 +30,7 @@ async def create_upload_file(file: UploadFile) -> dict[str, Any]:
         return {"message": "File saved successfully"}
 
     except Exception as e:
-        return {"message": e.args, "path": file_path}
+        return {"message": e.args}
 
 
 @app.get("/prediction")
@@ -49,4 +47,4 @@ def get_prediction() -> dict[str, Any]:
         return {"result": result}
 
     except Exception as e:
-        return {"message": e.args, "Path": str(os.getcwd)}
+        return {"message": e.args}
