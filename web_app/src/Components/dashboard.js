@@ -1,11 +1,21 @@
 
 import './dashboard.css';
 import React, { useState, useRef } from 'react';
+import axios from "axios"
 
 function Dashboard() {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState(null);
   const inputRef = useRef(null);
+
+  const handleButtonClick = async () => {
+    try {
+      const response = await axios.get('https://model/uploadfile');
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error making the request', error);
+    }
+  };
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -51,7 +61,7 @@ function Dashboard() {
           {!file && (
             <>
               <div className='header'>Drag & Drop to Upload File</div>
-              <button onClick={() => inputRef.current.click()}>Or click to select file</button>
+              <button onClick={() => {handleButtonClick(); inputRef.current.click()}}>Or click to select file</button>
               <input ref={inputRef} type="file" accept="image/*" onChange={handleInputChange} style={{ display: 'none' }} />
             </>
           )}

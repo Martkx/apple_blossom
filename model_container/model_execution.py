@@ -4,7 +4,7 @@ import numpy as np
 from typing import Any
 
 def load_model():
-    return keras.saving.load_model("dummy_model/test.keras")
+    return keras.saving.load_model("model_container/dummy_model/test.keras")
 
 def load_and_convert_image(img_path:str, img_height:int, img_width:int) -> np.ndarray:
     """This function loads a image and converted it into a np.ndarray

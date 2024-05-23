@@ -1,0 +1,30 @@
+@startuml
+
+Interface interface  
+node "Docker deamon Daemon" {
+  
+
+  component "ML-Model Container" as ML {
+    portin port_8080 as p1
+    
+    node "linux system"{
+        folder "Volume" as vol
+    }
+        
+    }
+    component "Web-App Container" as APP{
+        portout port_8070 as p2
+        node "ngnix server"{
+            folder "public" {
+                artifact index.html
+            }
+        }
+    }
+}
+
+p1 ----> p2 : Response
+p2 ----> p1 : Request
+interface ---> APP : image upload 
+APP ---> interface : predcition
+
+@enduml

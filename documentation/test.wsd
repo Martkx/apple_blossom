@@ -1,0 +1,21 @@
+@startuml
+
+node "Hynix Server" {
+    node "Docker Daemon" {
+        node "Python Container" {
+            artifact "Python 3.11 Image" as pythonImage
+            artifact "Application Code" as appCode
+            artifact "requirements.txt" as requirements
+            artifact "pip" as pipArtifact
+            artifact "libhdf5-dev" as hdf5Dev
+            
+            pythonImage --> pipArtifact : Upgrades pip
+            pythonImage --> hdf5Dev : Installs system dependencies
+            pipArtifact --> h5py : Installs h5py
+            requirements --> pipArtifact : Installs Python dependencies
+            
+        }
+    }
+}
+
+@enduml

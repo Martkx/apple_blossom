@@ -1,0 +1,15 @@
+services:
+  web_app:
+    build:
+      context: ./web_app
+      dockerfile: Dockerfile
+    ports:
+      - 8070:8070
+    depends_on:
+      - model
+  model:
+    build:
+      context: ./model_container
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
