@@ -1,0 +1,103 @@
+.App {
+  background-color: #2e2e2e;
+  width: 100%;
+  height: 100vh;
+  }
+
+header {
+background-color: #000000;
+height: 12vh;
+margin: 0;
+background-image:url(/public/headerimg.jpg);
+background-attachment: fixed;
+background-size: cover;
+background-position: 0px 350px;
+opacity: 87%;
+
+
+}
+
+.headerLeft{
+  width: 10%;
+  height: 100%;
+  background-color: black;
+  justify-content: center;
+  display: flex;
+  
+}
+
+.headerLeft img {
+  max-height: 12vh;
+  width: fit-content;
+}
+
+
+.Sidebar {
+height: 100vh;
+width: 10%;
+background-color: black;
+color: white; 
+
+
+
+}
+
+
+.container {
+  display: flex;
+  flex: 1;
+  height: 100%;
+
+overflow: hidden;
+
+
+
+
+  
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px; /* Platz für den Hauptinhalt hinzufügen */
+}
+
+ul {
+  height: auto;
+  width: 100%;
+  padding: 0;
+  
+   }
+
+li {
+  height: 50px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row:hover {
+  background-color: #171717;
+}
+
+.row #icon {
+  flex: 30%;
+  display: grid;
+  place-items: center;
+}
+
+#active {
+  border-left: solid 2px rgb(1, 228, 1);
+  background-color: #171717;
+}
+
+.row #title {
+  flex: 70%;
+}
+
+body {
+  margin: 0;
+  padding: 0
+}
+
