@@ -43,7 +43,7 @@ p {
  
 .container {
   display: flex;
- 
+  height: fit-content;
 }
   @media (max-width: 768px) {
     .container {
@@ -146,7 +146,7 @@ textarea{
   box-shadow: none;
 }
 .hr-line {
-  margin: 70px 0 20px;
+  margin: 50px 0 20px;
   border: 1px solid #343536;
 }
 .form-section {
@@ -166,8 +166,78 @@ textarea{
   padding: 20px;
 }
 
-
 .answer-section .answer {
   background-color: #343536;
   padding: 20px;
+}
+
+.stage {
+  background-color: #343536;
+  border-radius: 5px;
+  height: 30%;
+  display: flex; 
+  text-align: center;
+  align-items: center;
+	justify-content:center;
+ width: 100%;
+  font-size: 20px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding: 5px;
+  
+  
+}
+
+.copy-icon{
+
+  background-color: rgba(0, 0, 0, 0.511);
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+  position: relative;
+}
+.copy-icon:hover::after {
+  content: "Copy stage";
+  position: absolute;
+  bottom: 100%; /* Position above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.copy-icon:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Position above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+  z-index: 1;
+}
+
+.prediction, .probability {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 8px;
+  
+  
+}
+
+.xai{
+  width: 30%;
+  height: auto;
+  margin: 8px;
+  border-radius: 5px;
+  
 }

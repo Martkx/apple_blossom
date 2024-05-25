@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import logo from '../../apfel.png'
+
 
 const FormSection = ({ generateResponse }) => {
     const [newQuestion, setNewQuestion] = useState('');
@@ -15,7 +17,7 @@ const FormSection = ({ generateResponse }) => {
     return (
         <div>
             <div className="form-section">
-                <img style={{ width: 100, height: 100, display: 'inline' }} src="path-to-your-logo.png" alt='Bot' />
+                <img style={{ width: 100, height: 100, display: 'inline' }} src={logo} alt='Bot' />
                 <textarea
                     rows="5"
                     className="form-control"
