@@ -2,6 +2,7 @@
 import './dashboard.css';
 import Chatbot from './chatbot/chatbot.js';
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
 
 
 function Dashboard() {
@@ -41,6 +42,21 @@ function Dashboard() {
   const handleClose = () => {
     setIsOpen(false);
   };
+  const handleFileUpload = async () => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await axios.post('http://localhost:8080/uploadfile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
   return (
     <div>{isOpen && (
@@ -62,6 +78,7 @@ function Dashboard() {
         >
           {file && <><img src={URL.createObjectURL(file)} alt="uploaded" style={{ width: 'auto', maxHeight: '80%', }}/>
                       <button className='removeButton' onClick={handleRemoveImage}>Remove</button></>} 
+                      <button onClick={handleFileUpload}>Prediction</button>
           {!file && (
             <>
               <div className='header'>Drag & Drop to Upload File</div>
