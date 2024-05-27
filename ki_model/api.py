@@ -1,15 +1,31 @@
 from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 import ki_model.model_execution as model_execution
 from typing import Any
 
 FILE_PATHS: list = []
 app = FastAPI()
 
+# Configure CORS
+origins = [
+    "http://localhost:8070",  
+    "http://localhost:8080",  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    # Allows CORS requests from these origins
+    allow_origins=origins,  
+    allow_credentials=True,
+    # Allows all HTTP methods
+    allow_methods=["*"],  
+    # Allows all HTTP headers
+    allow_headers=["*"],  
+)
 
 @app.get("/")
-def reed_root():
+def read_root():
     return {"message": "Model API"}
-
 
 @app.post("/uploadfile")
 async def create_upload_file(file: UploadFile) -> dict[str, Any]:
@@ -31,7 +47,6 @@ async def create_upload_file(file: UploadFile) -> dict[str, Any]:
 
     except Exception as e:
         return {"message": e.args}
-
 
 @app.get("/prediction")
 def get_prediction() -> dict[str, Any]:
