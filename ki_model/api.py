@@ -2,6 +2,8 @@ from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import ki_model.model_execution as model_execution
 from typing import Any
+import ki_model.gradcam_heatmap as gradcam
+from fastapi.responses import FileResponse
 
 FILE_PATHS: list = []
 app = FastAPI()
@@ -38,7 +40,7 @@ async def create_upload_file(file: UploadFile) -> dict[str, Any]:
         dict[str, Any]: information about the upload status
     """
     try:
-        file_path = f"ki_model/images/{file.filename}"
+        file_path = f"ki_model/images/uploads/{file.filename}"
         content = await file.read()
         with open(file_path, "wb") as f:
             f.write(content)
@@ -63,3 +65,21 @@ def get_prediction() -> dict[str, Any]:
 
     except Exception as e:
         return {"message": e.args}
+    
+@app.get("/gradcam") 
+def get_gradcam():
+    """API-Endpoint to get a gradcam image for the prediction
+    Returns:
+        .jpg
+    """
+    img_path_save = 'ki_model/images/grad_cam/grad_cam.jpg'
+    last_conv_layer_name = "conv_pw_13_relu" 
+    img_size= (224, 224)  
+    try:
+        model = model_execution.load_model()
+        img_array = gradcam.get_img_array(img_path_gradcam=FILE_PATHS[-1], img_size_gradcam=img_size)
+        heatmap = gradcam.make_gradcam_heatmap(img_array, model, last_conv_layer_name)
+        gradcam.save_gradcam(img_path=FILE_PATHS[-1], heatmap=heatmap)
+        return FileResponse(img_path_save, media_type='image/jpeg', filename="grad_cam.jpg")
+    except Exception as e:
+        return {"message":e.args}

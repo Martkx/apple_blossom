@@ -66,6 +66,15 @@ function Dashboard() {
     } catch (error) {
       console.error('Error getting prediction:', error);
     }
+    // get grad cam
+    try {
+      const response = await axios.get('http://localhost:8080/gradcam');
+      console.log('Prediction response:', response);
+      // update state with prediction result
+      //setPrediction(response.data.result); 
+    } catch (error) {
+      console.error('Error getting prediction:', error);
+    }
   };
 
   return (

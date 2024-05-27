@@ -1,9 +1,9 @@
-FROM python:3.11
+FROM python:3.12
 
 WORKDIR /code
 
 RUN pip install --upgrade pip
-RUN apt-get update && apt-get install -y libhdf5-dev
+RUN apt-get update && apt-get install -y libhdf5-dev && apt-get install -y libgl1-mesa-glx 
 RUN pip install --no-binary h5py h5py
 
 COPY ./requirements.txt /code/requirements.txt

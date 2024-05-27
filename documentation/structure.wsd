@@ -1,0 +1,37 @@
+@startuml
+
+Interface User
+node "Docker Daemon" {
+  
+  component "ML-Model Container" as ML {
+    portin "8080" as p1
+    
+    node "Linux System" {
+        database "Image Directory" as vol
+        node "FastAPI" as fastapi
+        node "Python Scripts" as python {
+            folder "Load and Prediction" as load_and_prediction
+            folder "X-AI" as x_ai
+        }
+    }
+  }
+
+  component "Web-App Container" as APP {
+    portout "8070" as p2
+    node "NGINX Server" as nginx {
+        folder "Public" as public {
+            artifact "index.html"
+        }
+    }
+  }
+}
+
+p1 ---> p2 : Response
+p2 ---> p1 : Request
+User ---> APP : Image Upload
+APP ---> User : Prediction 
+
+load_and_prediction --> vol : Read
+vol --> load_and_prediction : Write
+
+@enduml
