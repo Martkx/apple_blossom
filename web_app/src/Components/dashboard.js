@@ -6,7 +6,8 @@ import axios from 'axios';
 function Dashboard() {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState(null);
-  const [prediction, setPrediction] = useState(null); 
+  const [prediction, setPrediction] = useState(null);
+  const [gradCamImage, setGradCamImage] = useState(null); 
   const inputRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -61,19 +62,19 @@ function Dashboard() {
     try {
       const response = await axios.get('http://localhost:8080/prediction');
       console.log('Prediction response:', response.data.result);
-      // update state with prediction result
       setPrediction(response.data.result); 
     } catch (error) {
       console.error('Error getting prediction:', error);
     }
-    // get grad cam
+
+    // get grad_cam image
     try {
-      const response = await axios.get('http://localhost:8080/gradcam');
-      console.log('Prediction response:', response);
-      // update state with prediction result
-      //setPrediction(response.data.result); 
+      const response = await axios.get('http://localhost:8080/gradcam', { responseType: 'blob' });
+      console.log('Grad-CAM response:', response);
+      const imageUrl = URL.createObjectURL(response.data);
+      setGradCamImage(imageUrl); 
     } catch (error) {
-      console.error('Error getting prediction:', error);
+      console.error('Error getting Grad-CAM image:', error);
     }
   };
 
@@ -117,6 +118,9 @@ function Dashboard() {
             BBCH stage: 
             {prediction && ` ${prediction}`}
           </h3>
+          {gradCamImage && (
+            <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+          )}
         </div>
       </div>
       <div className='card'>
