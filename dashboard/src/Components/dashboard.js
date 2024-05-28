@@ -2,11 +2,14 @@
 import './dashboard.css';
 import Chatbot from './chatbot/chatbot.js';
 import React, { useState, useRef } from 'react';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function Dashboard() {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState(null);
+  const [setCopied] = useState(false);
   const inputRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -41,6 +44,20 @@ function Dashboard() {
   const handleClose = () => {
     setIsOpen(false);
   };
+  const copyText = (stage) => {
+    const textToCopy = `What is ${stage} of an apple blossom?`
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err);
+      });}
+
+  // Beispiel für einen stage-Wert. Dies sollte in deiner tatsächlichen Implementierung dynamisch sein.
+  const stage = "BBCH 59";
+  const probability ="94%"
 
   return (
     <div>{isOpen && (
@@ -73,7 +90,15 @@ function Dashboard() {
       </div>
       <div className='card'>
         <h3>BBCH stage</h3>
-      </div></div><div className='card' ><Chatbot/></div>
+        <div className='container'><div className='prediction'><h4>The model predict: </h4><div className='stage'>{stage}<div
+                            className="copy-icon"
+                            onClick={() => copyText(stage)}>
+                            <FontAwesomeIcon icon={faCopy} /></div></div></div>
+                            <div className='probability'><h4>With a probalitiy of</h4><div className='stage'>{probability}</div>
+                            </div>
+              </div><img className='xai' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToHTRBgbXSF4IvRcDAVXoPgFbUEDs9caSlClkgmBxY4w&s' alt='heatmap'/>
+              </div>
+      </div><div className='card' ><Chatbot/></div>
     </div>
   );
 }
