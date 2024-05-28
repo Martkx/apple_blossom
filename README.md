@@ -4,12 +4,19 @@
 
 - Docker
 - Python
-
-## Install requirements
-
-- pip install -r requirements.txt
   
-## docker commands
+## How to use:
+
+### 1. Install requirements
+
+- ```bash pip install -r requirements.txt'''
   
-- docker build -t <image_name> .
-- docker run -p 8080:8080 <image_name>
+### 2. run docker commands
+  
+- move to the root directorty
+- docker compose up
+
+### 3. open browser under:
+
+- localhost:8070        -> Interface for prediction
+- localhost:8080/docs   -> Interface for api testing
