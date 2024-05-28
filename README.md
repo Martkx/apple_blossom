@@ -2,8 +2,8 @@
 
 ## Software Requirements
 
-- Docker
-- Python
+- Docker :whale:
+- Python :snake:
   
 ## How to use:
 
