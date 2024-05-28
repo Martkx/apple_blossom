@@ -3,18 +3,38 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import matplotlib.pyplot as plt
+from typing import Any
 import cv2
 
 model = tf.keras.models.load_model("ki_model/2.model_developing/model_mobileNet_apples.keras")
 
-def get_img_array(img_path_gradcam, img_size_gradcam):
+def get_img_array(img_path_gradcam:str, img_size_gradcam:tuple):
+    """This function convert a image to a numpy array.
+    Args:
+        img_path_gradcam (str): path of the saved image
+        img_size_gradcam (tuple): traget size in pixel
+
+    Returns:
+        img_array (np.array): converted image as array
+    """
     img_array = image.img_to_array(image.load_img(img_path_gradcam, target_size=img_size_gradcam))
     img_array = np.expand_dims(img_array, axis=0)
     img_array = tf.keras.applications.mobilenet.preprocess_input(img_array)
 
     return img_array
 
-def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None):
+def make_gradcam_heatmap(img_array:np.ndarray, model:Any, last_conv_layer_name:str, pred_index=None):
+    """This function creates a np.ndarray for a grad cam image.
+
+    Args:
+        img_array (np.ndarray): converted image as array
+        model (Any): keras model
+        last_conv_layer_name (str): last layer in model
+        pred_index (_type_, optional): set the pred_index to the highest predicted probability
+
+    Returns:
+        heatmap (np.ndarray): array
+    """
     grad_model = tf.keras.models.Model(
         inputs=model.input, 
         outputs=[model.get_layer(last_conv_layer_name).output, model.output]
@@ -36,7 +56,14 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None
     heatmap = tf.maximum(heatmap, 0) / tf.math.reduce_max(heatmap)
     return heatmap.numpy()
 
-def save_gradcam(img_path, heatmap, alpha=0.4):
+def save_gradcam(img_path:str, heatmap:np.ndarray, alpha=0.4):
+    """This function save the grad cam image .
+
+    Args:
+        img_path (str): path to the input image
+        heatmap (np.ndarray): grad cam array
+        alpha (float, optional): percentage of transparency
+    """
     img = cv2.imread(img_path)
     # Umwandlung in RGB für matplotlib
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  

@@ -25,6 +25,8 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
+model = model_execution.load_model()
+
 @app.get("/")
 def read_root():
     return {"message": "Model API"}
@@ -57,7 +59,6 @@ def get_prediction() -> dict[str, Any]:
         dict[str, Any]: prediction
     """
     try:
-        model = model_execution.load_model()
         img_array = model_execution.load_and_convert_image(FILE_PATHS[-1], 224, 224)
         result = model_execution.predict(model, img_array)
 
@@ -76,7 +77,6 @@ def get_gradcam():
     last_conv_layer_name = "conv_pw_13_relu" 
     img_size= (224, 224)  
     try:
-        model = model_execution.load_model()
         img_array = gradcam.get_img_array(img_path_gradcam=FILE_PATHS[-1], img_size_gradcam=img_size)
         heatmap = gradcam.make_gradcam_heatmap(img_array, model, last_conv_layer_name)
         gradcam.save_gradcam(img_path=FILE_PATHS[-1], heatmap=heatmap)
