@@ -29,7 +29,7 @@ def load_and_convert_image(img_path:str, img_height:int, img_width:int) -> np.nd
     
     return img_array
 
-def predict(model:Any, img_array: np.ndarray) -> int:
+def predict(model:Any, img_array: np.ndarray) -> tuple[int,float]:
     """This function crates a prediction of a given np.ndarray
 
     Args:
@@ -42,6 +42,7 @@ def predict(model:Any, img_array: np.ndarray) -> int:
     pred = model.predict(img_array)
  
     score = tf.nn.softmax(pred[0])
-    result = int([np.argmax(score)][0])
+    predicted_class = int([np.argmax(score)][0])
+    probability = round(float(score[predicted_class]),2)
 
-    return result
+    return predicted_class, probability

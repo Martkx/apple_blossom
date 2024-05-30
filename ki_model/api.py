@@ -60,9 +60,10 @@ def get_prediction() -> dict[str, Any]:
     """
     try:
         img_array = model_execution.load_and_convert_image(FILE_PATHS[-1], 224, 224)
-        result = model_execution.predict(model, img_array)
+        predicted_class, probability = model_execution.predict(model, img_array)
 
-        return {"result": result}
+        return {"predicted_class": predicted_class,
+                "probability": probability}
 
     except Exception as e:
         return {"message": e.args}

@@ -2,11 +2,15 @@ import './dashboard.css';
 import Chatbot from './chatbot/chatbot.js';
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Dashboard() {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState(null);
-  const [prediction, setPrediction] = useState(null);
+  const [setCopied] = useState(false);
+  const [predictedClass, setPredictedClass] = useState(null);
+  const [probability, setProbability] = useState(null);
   const [gradCamImage, setGradCamImage] = useState(null); 
   const inputRef = useRef(null);
 
@@ -61,8 +65,9 @@ function Dashboard() {
     // get prediction
     try {
       const response = await axios.get('http://localhost:8080/prediction');
-      console.log('Prediction response:', response.data.result);
-      setPrediction(response.data.result); 
+      console.log('Prediction response:', response.data.predicted_class);
+      setPredictedClass(response.data.predicted_class); 
+      setProbability(response.data.probability)
     } catch (error) {
       console.error('Error getting prediction:', error);
     }
@@ -77,6 +82,20 @@ function Dashboard() {
       console.error('Error getting Grad-CAM image:', error);
     }
   };
+
+  const copyText = (stage) => {
+    const textToCopy = `What is ${stage} of an apple blossom?`
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        setCopied(true);
+        // Reset copied state after 2 seconds
+        setTimeout(() => setCopied(false), 2000); 
+      })
+      .catch((err) => {
+        console.error('Failed to copy text: ', err);
+      });
+  }
+
 
   return (
     <div>
@@ -114,13 +133,23 @@ function Dashboard() {
           </div>
         </div>
         <div className='card'>
-          <h3>
-            BBCH stage: 
-            {prediction && ` ${prediction}`}
-          </h3>
-          {gradCamImage && (
-            <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
-          )}
+          <h3>Result</h3>
+          <div className='result-container'>
+              <div className='predicted_class'><h4>The model predicts BBCH stage:</h4>
+                  <div className='stage'>{predictedClass && ` ${predictedClass}`}
+                    <div className="copy-icon" onClick={() => copyText(predictedClass)}><FontAwesomeIcon icon={faCopy} /></div>
+                  </div>
+              </div>
+              <div className='probability'><h4>With a probability of:</h4>
+                  <div className='stage'>{probability && ` ${probability}`}</div>
+              </div>
+          </div>
+          <div className='grad_cam'>
+            <h3>Grad-CAM</h3>
+            {gradCamImage && (
+              <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            )}
+          </div>
         </div>
       </div>
       <div className='card'>
