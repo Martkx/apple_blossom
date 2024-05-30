@@ -2,14 +2,30 @@
 
 ## Software Requirements
 
-- Docker
-- Python
+- Docker :whale:
+- Python :snake:
 
-## Install requirements
+## Structure
+![Compoenetdiagram](./documentation/structure.png)
+  
+## How to use:
 
-- pip install -r requirements.txt
+### 1. Install requirements
+
+```bash
+pip install -r requirements.txt
+```
   
-## docker commands
+### 2. run docker commands
   
-- docker build -t <image_name> .
-- docker run -p 8080:8080 <image_name>
+- move to the root directorty
+  
+```bash
+docker compose up
+```
+
+### 3. open browser :
+
+- Once it has started, you can open your browser to:
+- localhost:8070        -> Interface for prediction     :[http://localhost:8070](http://localhost:8070)
+- localhost:8080/docs   -> Interface for api testing    :[http://localhost:8080/docs](http://localhost:8080/docs)
