@@ -43,7 +43,7 @@ p {
  
 .container {
   display: flex;
- 
+  height: fit-content;
 }
   @media (max-width: 768px) {
     .container {
@@ -146,7 +146,7 @@ textarea{
   box-shadow: none;
 }
 .hr-line {
-  margin: 70px 0 20px;
+  margin: 50px 0 20px;
   border: 1px solid #343536;
 }
 .form-section {
@@ -165,7 +165,6 @@ textarea{
   background-color: #ff16d8;
   padding: 20px;
 }
-
 
 .answer-section .answer {
   background-color: #343536;
