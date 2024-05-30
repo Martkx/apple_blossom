@@ -4,6 +4,9 @@
 
 - Docker :whale:
 - Python :snake:
+
+## Structure
+![Compoenetdiagram](./documentation/structure.png)
   
 ## How to use:
 
