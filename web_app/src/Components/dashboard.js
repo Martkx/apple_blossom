@@ -140,9 +140,6 @@ function Dashboard() {
                     <div className="copy-icon" onClick={() => copyText(predictedClass)}><FontAwesomeIcon icon={faCopy} /></div>
                   </div>
               </div>
-              <div className='probability'><h4>With a probability of:</h4>
-                  <div className='stage'>{probability && ` ${probability}`}</div>
-              </div>
           </div>
           <div className='grad_cam'>
             <h3>Grad-CAM</h3>
