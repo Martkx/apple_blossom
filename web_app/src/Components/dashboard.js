@@ -104,7 +104,7 @@ function Dashboard() {
           <div className='icon'>
             <button onClick={handleClose}>x</button>
           </div>
-          <p>DISCLAIMER: Only the BBCH stages from 57 to 71 can be detected</p>
+          <p>DISCLAIMER: Only the BBCH stages from 53 to 71 can be detected</p>
         </div>
       )}
       <div className='container'>
