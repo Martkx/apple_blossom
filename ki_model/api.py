@@ -28,7 +28,7 @@ app.add_middleware(
 model = model_execution.load_model()
 
 @app.get("/")
-def read_root():
+async def read_root():
     return {"message": "Model API"}
 
 @app.post("/uploadfile")
@@ -53,7 +53,7 @@ async def create_upload_file(file: UploadFile) -> dict[str, Any]:
         return {"message": e.args}
 
 @app.get("/prediction")
-def get_prediction() -> dict[str, Any]:
+async def get_prediction() -> dict[str, Any]:
     """API-Endpoint to get a prediction
     Returns:
         dict[str, Any]: prediction
@@ -69,7 +69,7 @@ def get_prediction() -> dict[str, Any]:
         return {"message": e.args}
     
 @app.get("/gradcam") 
-def get_gradcam():
+async def get_gradcam():
     """API-Endpoint to get a gradcam image for the prediction
     Returns:
         .jpg
