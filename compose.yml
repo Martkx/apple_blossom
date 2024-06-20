@@ -3,6 +3,8 @@ services:
     build:
       context: ./web_app
       dockerfile: Dockerfile
+      args:
+        - REACT_APP_GPT=$REACT_APP_GPT
     ports:
       - 8070:8070
     depends_on:

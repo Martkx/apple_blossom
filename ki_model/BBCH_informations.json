@@ -1,0 +1,42 @@
+{
+  "53": {
+    "name": "Knospenaufbruch",
+    "definition": "Grüne Blätter, die das Blütenbüschel umhüllen, werden sichtbar."
+  },
+  "54": {
+    "name": "Mausohrstadium",
+    "definition": "Grüne Blattspitzen überragen Knospenschuppen um 10 mm; erste Blätter spreizen sich ab."
+  },
+  "56": {
+    "name": "Grünknospenstadium",
+    "definition": "Noch geschlossene Einzelblüten beginnen sich voneinander zu lösen."
+  },
+  "57": {
+    "name": "Rotknospenstadium",
+    "definition": "Blütenstiele strecken sich, Kelchblätter sind leicht geöffnet; Blütenblätter gerade erkennbar."
+  },
+  "59": {
+    "name": "Ballonstadium",
+    "definition": "Mehrzahl der Blüten im Ballonstadium."
+  },
+  "61": {
+    "name": "Beginn der Blüte",
+    "definition": "Etwa 10% der Blüten geöffnet."
+  },
+  "65": {
+    "name": "Vollblüte",
+    "definition": "Mindestens 50% der Blüten geöffnet, erste Blütenblätter fallen ab."
+  },
+  "67": {
+    "name": "Abgehende Blüte",
+    "definition": "Mehrzahl der Blütenblätter abgefallen."
+  },
+  "69": {
+    "name": "Ende der Blüte",
+    "definition": "Alle Blütenblätter abgefallen."
+  },
+  "71": {
+    "name": "Nachblütefruchtfall",
+    "definition": "Fruchtdurchmesser bis 10 mm."
+  }
+}
