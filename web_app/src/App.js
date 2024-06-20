@@ -4,7 +4,6 @@ import Dashboard from './Components/dashboard.js';
 import Sidebar from './Components/sidebar.js';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
-
 function App() {
   return (
     <Router>

@@ -4,7 +4,8 @@ import FormSection from './FormSection.js';
 import AnswerSection from './AnswerSection.js';
 
 const Chatbot = () => {
-    const apiKey = 'sk-proj-vCxLeSKhijfbLLwetLC7T3BlbkFJO4HrrODKirPruEDZ6QGH';
+    const apiKey = process.env.REACT_APP_GPT;
+    console.log(apiKey)
     const openai = new OpenAI({
         apiKey,
         dangerouslyAllowBrowser: true 
@@ -60,6 +61,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-//sk-proj-vCxLeSKhijfbLLwetLC7T3BlbkFJO4HrrODKirPruEDZ6QGH key2
-
-//sk-proj-83PDt2SgtB1reBYya6I5T3BlbkFJ9T4EgMhyeHGNlRWgwz2K key1

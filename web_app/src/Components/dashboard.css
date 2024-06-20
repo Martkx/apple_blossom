@@ -178,7 +178,7 @@ textarea{
   text-align: center;
   align-items: center;
 	justify-content:center;
- width: 100%;
+  width: 100%;
   font-size: 20px;
   font-family:Arial, Helvetica, sans-serif;
   padding: 5px;
@@ -239,4 +239,20 @@ textarea{
 .grad_cam img {
   max-width: 100%;
   height: auto;
+}
+
+.bbch_definition {
+  background-color: #343536;
+  border-radius: 5px;
+  height: 30%;
+  display: flex; 
+  text-align: center;
+  align-items: center;
+	justify-content:center;
+  width: 100%;
+  font-size: 20px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding: 5px;
+  
+  
 }

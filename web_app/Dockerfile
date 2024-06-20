@@ -6,8 +6,11 @@ WORKDIR /app
 COPY ./package*.json /app
 RUN npm install
 RUN npm install axios
+RUN npm install dotenv
 COPY ./public /app/public
 COPY ./src /app/src
+ARG REACT_APP_GPT
+ENV REACT_APP_GPT=${REACT_APP_GPT}
 
 # install dependencies
 RUN npm run build

@@ -12,6 +12,8 @@ function Dashboard() {
   const [predictedClass, setPredictedClass] = useState(null);
   const [probability, setProbability] = useState(null);
   const [gradCamImage, setGradCamImage] = useState(null); 
+  const [bbchName, setBbchName] = useState(null);
+  const [bbchDefinition, setBbchDefinition] = useState(null);
   const inputRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -66,8 +68,13 @@ function Dashboard() {
     try {
       const response = await axios.get('http://localhost:8080/prediction');
       console.log('Prediction response:', response.data.predicted_class);
+      // update variables
+      setBbchName(response.data.name)
       setPredictedClass(response.data.predicted_class); 
       setProbability(response.data.probability)
+      setBbchDefinition(
+        `BBCH ${response.data.predicted_class} ist das Stadium: "${response.data.name}". 
+        ${response.data.definition}`);
     } catch (error) {
       console.error('Error getting prediction:', error);
     }
@@ -104,7 +111,7 @@ function Dashboard() {
           <div className='icon'>
             <button onClick={handleClose}>x</button>
           </div>
-          <p>DISCLAIMER: Only the BBCH stages from 53 to 71 can be detected</p>
+          <p>DISCLAIMER: Only the BBCH stages from 53git to 71 can be detected</p>
         </div>
       )}
       <div className='container'>
@@ -140,6 +147,10 @@ function Dashboard() {
                     <div className="copy-icon" onClick={() => copyText(predictedClass)}><FontAwesomeIcon icon={faCopy} /></div>
                   </div>
               </div>
+          </div>
+          <div className='defintion'>
+            <h3>Definition</h3>
+            {bbchDefinition && ` ${bbchDefinition}`}
           </div>
           <div className='grad_cam'>
             <h3>Grad-CAM</h3>
