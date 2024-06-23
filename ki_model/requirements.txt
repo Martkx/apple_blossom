@@ -8,3 +8,6 @@ tensorflow==2.16.1
 pillow==10.3.0
 opencv-python==4.9.0.80
 matplotlib==3.8.4
+shap==0.45.1
+lime==0.2.0.1
+scikit-image==0.23.2
