@@ -12,8 +12,11 @@ function Dashboard() {
   const [predictedClass, setPredictedClass] = useState(null);
   const [probability, setProbability] = useState(null);
   const [gradCamImage, setGradCamImage] = useState(null); 
+  const [shapImage, setShapImage] = useState(null); 
+  const [limeImage, setLimeImage] = useState(null); 
   const [bbchName, setBbchName] = useState(null);
   const [bbchDefinition, setBbchDefinition] = useState(null);
+  const [activeTab, setActiveTab] = useState('gradCam');
   const inputRef = useRef(null);
 
   const handleDragOver = (e) => {
@@ -88,6 +91,24 @@ function Dashboard() {
     } catch (error) {
       console.error('Error getting Grad-CAM image:', error);
     }
+    // get shap_image
+    try {
+      const response = await axios.get('http://localhost:8080/shap', { responseType: 'blob' });
+      console.log('Shap response:', response);
+      const imageUrl = URL.createObjectURL(response.data);
+      setShapImage(imageUrl); 
+    } catch (error) {
+      console.error('Error getting Shap image:', error);
+    }
+    // get lime_image
+    try {
+      const response = await axios.get('http://localhost:8080/lime', { responseType: 'blob' });
+      console.log('Shap response:', response);
+      const imageUrl = URL.createObjectURL(response.data);
+      setLimeImage(imageUrl); 
+    } catch (error) {
+      console.error('Error getting Shap image:', error);
+    }
   };
 
   const copyText = (stage) => {
@@ -153,10 +174,23 @@ function Dashboard() {
             {bbchDefinition && ` ${bbchDefinition}`}
           </div>
           <div className='grad_cam'>
-            <h3>Grad-CAM</h3>
-            {gradCamImage && (
-              <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            <h3>X-AI</h3>
+            <div className="tab-buttons">
+              <button className={activeTab === 'gradCam' ? 'active' : ''} onClick={() => setActiveTab('gradCam')}>Grad-CAM</button>
+              <button className={activeTab === 'shap' ? 'active' : ''} onClick={() => setActiveTab('shap')}>Shap</button>
+              <button className={activeTab === 'lime' ? 'active' : ''} onClick={() => setActiveTab('lime')}>Lime</button>
+            </div>
+          <div className="tab-content">
+            {activeTab === 'gradCam' && gradCamImage && (
+            <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
             )}
+            {activeTab === 'shap' &&  shapImage && (
+              <img src={shapImage} alt="Shap" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            )}
+            {activeTab === 'lime' && limeImage && (
+              <img src={limeImage} alt="Lime" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            )}
+          </div>
           </div>
         </div>
       </div>

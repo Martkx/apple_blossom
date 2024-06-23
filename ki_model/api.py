@@ -2,8 +2,10 @@ from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import ki_model.model_execution as model_execution
 from typing import Any
-import ki_model.gradcam_heatmap as gradcam
 from fastapi.responses import FileResponse
+import ki_model.explainable_ai.explanation_gradcam as gradcam
+import ki_model.explainable_ai.explanation_shap as shap
+import ki_model.explainable_ai.explanation_lime as lime
 
 FILE_PATHS: list = []
 app = FastAPI()
@@ -95,7 +97,47 @@ async def get_gradcam():
         heatmap = gradcam.make_gradcam_heatmap(img_array, model, last_conv_layer_name)
         gradcam.save_gradcam(img_path=FILE_PATHS[-1], heatmap=heatmap)
         return FileResponse(
-            img_path_save, media_type="image/jpeg", filename="grad_cam.jpg"
+            img_path_save, media_type="image/jpg", filename="grad_cam.png"
         )
     except Exception as e:
         return {"message": e.args}
+
+@app.get("/shap")   
+async def get_shap():
+    """API-Endpoint to get a shap image for the prediction
+    Returns:
+        .jpg
+    """
+    img_path_save = "ki_model/images/shap/shap_image.jpg"
+    img_size = (224, 224)
+    try:
+        img_array = gradcam.get_img_array(
+            img_path_gradcam=FILE_PATHS[-1], img_size_gradcam=img_size
+        )
+        shap.create_shap(model,img_array)
+        return FileResponse(
+            img_path_save, media_type="image/jpeg", filename="shap_image.jpg"
+        )
+    except Exception as e:
+        return {"message": e.args}
+    
+
+@app.get("/lime")   
+async def get_lime():
+    """API-Endpoint to get a lime image for the prediction
+    Returns:
+        .jpg
+    """
+    img_path_save = "ki_model/images/lime/lime_image.jpg"
+    img_size = (224, 224)
+    try:
+        img_array = gradcam.get_img_array(
+            img_path_gradcam=FILE_PATHS[-1], img_size_gradcam=img_size
+        )
+        lime.create_lime(model, img_array, FILE_PATHS[-1], img_size)
+        return FileResponse(
+            img_path_save, media_type="image/jpeg", filename="lime_image.jpg"
+        )
+    except Exception as e:
+        return {"message": e.args}
+    

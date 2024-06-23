@@ -12,7 +12,7 @@ def get_img_array(img_path_gradcam:str, img_size_gradcam:tuple):
     """This function convert a image to a numpy array.
     Args:
         img_path_gradcam (str): path of the saved image
-        img_size_gradcam (tuple): traget size in pixel
+        img_size_gradcam (tuple): target size in pixel
 
     Returns:
         img_array (np.array): converted image as array
