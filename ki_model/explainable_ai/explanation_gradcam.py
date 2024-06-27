@@ -72,12 +72,12 @@ def save_gradcam(img_path:str, heatmap:np.ndarray, alpha=0.4):
     plt.figure(figsize=(10, 10))
     plt.subplot(1, 3, 1)
     plt.imshow(img_rgb)
-    plt.title("Original Image")
+    plt.title("Original Bild")
     plt.axis('off')
 
     plt.subplot(1, 3, 2)
     plt.imshow(heatmap)
-    plt.title("Grad-CAM Heatmap")
+    plt.title("GradCam Heatmap")
     plt.axis('off')
 
     heatmap = cv2.resize(heatmap, (img.shape[1], img.shape[0]))
@@ -90,7 +90,7 @@ def save_gradcam(img_path:str, heatmap:np.ndarray, alpha=0.4):
 
     plt.subplot(1, 3, 3)
     plt.imshow(superimposed_img_rgb)
-    plt.title("Superimposed Image")
+    plt.title("Überlagertes Bild")
     plt.axis('off')
     plt.savefig("ki_model/images/grad_cam/grad_cam.jpg", bbox_inches="tight")
 

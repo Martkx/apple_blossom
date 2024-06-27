@@ -132,12 +132,12 @@ function Dashboard() {
           <div className='icon'>
             <button onClick={handleClose}>x</button>
           </div>
-          <p>DISCLAIMER: Only the BBCH stages from 53git to 71 can be detected</p>
+          <p>DISCLAIMER: Es können nur die BBCH-Stufen von 53 bis 71 erkannt werden</p>
         </div>
       )}
       <div className='container'>
         <div className='card'>
-          <h3>Upload your File</h3>
+          <h3>Laden Sie Ihr Bild hoch</h3>
           <div
             className={`drag-area ${dragging ? 'active' : ''}`}
             onDragOver={handleDragOver}
@@ -147,23 +147,23 @@ function Dashboard() {
             {file && (
               <>
                 <img src={URL.createObjectURL(file)} alt="uploaded" style={{ width: 'auto', maxHeight: '80%' }} />
-                <button className='removeButton' onClick={handleRemoveImage}>Remove</button>
-                <button onClick={handleFileUpload}>Prediction</button>
+                <button className='removeButton' onClick={handleRemoveImage}>Entfernen</button>
+                <button onClick={handleFileUpload}>Prädiktion</button>
               </>
             )}
             {!file && (
               <>
-                <div className='header'>Drag & Drop to Upload File</div>
-                <button onClick={() => inputRef.current.click()}>Or click to select file</button>
+                <div className='header'>Drag & Drop um ein Bild hoch zuladen</div>
+                <button onClick={() => inputRef.current.click()}>Oder klicken Sie um ein Bild auszuwählen</button>
                 <input ref={inputRef} type="file" accept="image/*" onChange={handleInputChange} style={{ display: 'none' }} />
               </>
             )}
           </div>
         </div>
         <div className='card'>
-          <h3>Result</h3>
+          <h3>Ergebnis</h3>
           <div className='result-container'>
-              <div className='predicted_class'><h4>The model predicts BBCH stage:</h4>
+              <div className='predicted_class'><h4>Das Modell sagt das BBCH-Stadium voraus:</h4>
                   <div className='stage'>{predictedClass && ` ${predictedClass}`}
                     <div className="copy-icon" onClick={() => copyText(predictedClass)}><FontAwesomeIcon icon={faCopy} /></div>
                   </div>
@@ -176,19 +176,20 @@ function Dashboard() {
           <div className='grad_cam'>
             <h3>X-AI</h3>
             <div className="tab-buttons">
-              <button className={activeTab === 'gradCam' ? 'active' : ''} onClick={() => setActiveTab('gradCam')}>Grad-CAM</button>
-              <button className={activeTab === 'shap' ? 'active' : ''} onClick={() => setActiveTab('shap')}>Shap</button>
-              <button className={activeTab === 'lime' ? 'active' : ''} onClick={() => setActiveTab('lime')}>Lime</button>
+              <button className={activeTab === 'lime' ? 'active' : ''} onClick={() => setActiveTab('lime')}>LIME</button>
+              <button className={activeTab === 'gradCam' ? 'active' : ''} onClick={() => setActiveTab('gradCam')}>GradCam</button>
+              <button className={activeTab === 'shap' ? 'active' : ''} onClick={() => setActiveTab('shap')}>SHAP</button>
+              
             </div>
           <div className="tab-content">
+          {activeTab === 'lime' && limeImage && (
+              <img src={limeImage} alt="LIME" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            )}
             {activeTab === 'gradCam' && gradCamImage && (
-            <img src={gradCamImage} alt="Grad-CAM" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+            <img src={gradCamImage} alt="GradCam" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
             )}
             {activeTab === 'shap' &&  shapImage && (
-              <img src={shapImage} alt="Shap" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
-            )}
-            {activeTab === 'lime' && limeImage && (
-              <img src={limeImage} alt="Lime" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
+              <img src={shapImage} alt="SHAP" style={{ width: '100%', maxHeight: '400px', marginTop: '10px' }} />
             )}
           </div>
           </div>

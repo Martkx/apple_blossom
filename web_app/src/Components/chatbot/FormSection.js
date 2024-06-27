@@ -21,13 +21,13 @@ const FormSection = ({ generateResponse }) => {
                 <textarea
                     rows="5"
                     className="form-control"
-                    placeholder="Ask me anything..."
+                    placeholder="Du kannst mich nach allem fragen..."
                     value={newQuestion}
                     onChange={(e) => setNewQuestion(e.target.value)}
                 ></textarea>
             </div>
             <button className="btn" onClick={handleSubmit} disabled={isSubmitting}>
-                {isSubmitting ? 'Generating...' : 'Generate Response'}
+                {isSubmitting ? 'Generieren...' : 'Antwort generieren'}
             </button>
         </div>
     );

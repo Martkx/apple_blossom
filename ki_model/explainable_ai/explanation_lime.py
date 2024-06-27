@@ -26,7 +26,7 @@ def create_lime(model:Any, image_array: np.ndarray, path_input_image: str, image
         model.predict, 
         top_labels=1, 
         hide_color=0, 
-        num_samples=500
+        num_samples=250
     )
 
     # Darstellung der LIME Erklärung
@@ -42,11 +42,11 @@ def create_lime(model:Any, image_array: np.ndarray, path_input_image: str, image
     # Originalbild
     plt.subplot(1, 2, 1)
     plt.imshow(image.load_img(path_input_image, target_size=image_size))
-    plt.title('Original Image')
+    plt.title('Original Bild')
 
     # LIME Bild
     plt.subplot(1, 2, 2)
-    plt.imshow(mark_boundaries(temp, mask, color=(255,0,179)))
-    plt.title('LIME Explanation')
+    plt.imshow(mark_boundaries(temp, mask, color=(165,255,0)))
+    plt.title('LIME Erklärung')
 
     plt.savefig("ki_model/images/lime/lime_image.jpg", bbox_inches="tight")
