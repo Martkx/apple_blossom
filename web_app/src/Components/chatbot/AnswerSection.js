@@ -22,7 +22,7 @@ const AnswerSection = ({ storedValues }) => {
                             <FontAwesomeIcon icon={faCopy} />
                         </div>
                     </div>
-                )) : <p>No answers available.</p>}
+                )) : <p>Keine Antworten verfügbar.</p>}
                 
             </div>
         </>
