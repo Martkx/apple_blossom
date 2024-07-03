@@ -34,9 +34,9 @@ node "Docker Daemon" {
   
 }
 
-interface "                 localhost:8070" as p70
+interface "localhost:8070" as p70
 
-p2 --right---- p70
+p2 ----right------ p70
 p2 -->p1:request
 p1 ---> p2: response
 

@@ -174,7 +174,7 @@ function Dashboard() {
             {bbchDefinition && ` ${bbchDefinition}`}
           </div>
           <div className='grad_cam'>
-            <h3>X-AI</h3>
+            <h3>XAI</h3>
             <div className="tab-buttons">
               <button className={activeTab === 'lime' ? 'active' : ''} onClick={() => setActiveTab('lime')}>LIME</button>
               <button className={activeTab === 'gradCam' ? 'active' : ''} onClick={() => setActiveTab('gradCam')}>GradCam</button>
