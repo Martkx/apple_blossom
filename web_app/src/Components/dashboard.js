@@ -164,9 +164,7 @@ function Dashboard() {
           <h3>Ergebnis</h3>
           <div className='result-container'>
               <div className='predicted_class'><h4>Das Modell sagt das BBCH-Stadium voraus:</h4>
-                  <div className='stage'>{predictedClass && ` ${predictedClass}`}
-                    <div className="copy-icon" onClick={() => copyText(predictedClass)}><FontAwesomeIcon icon={faCopy} /></div>
-                  </div>
+                  <div className='stage'>{predictedClass && ` ${predictedClass}`}</div>
               </div>
           </div>
           <div className='defintion'>
